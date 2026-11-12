@@ -1,0 +1,81 @@
+/* ==========================================================================
+   SISTEMA DE DISEÑO & VARIABLES (NETFLIX PREMIUM STYLING)
+   ========================================================================== */
+
+@import url('https://googleapis.com');
+
+:root {
+    /* Paleta Netflix Oscuro (Por defecto) */
+    --bg-pure: #141414;
+    --bg-surface: #181818;
+    --bg-card: #2f2f2f;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E5E5E5;
+    --text-muted: #B3B3B3;
+    --accent-red: #E50914;
+    --accent-red-hover: #B81D24;
+    --border-color: #333333;
+    --shadow-sm: rgba(0, 0, 0, 0.5);
+    --shadow-lg: rgba(0, 0, 0, 0.85);
+
+    /* Tipografías */
+    --font-brand: 'Bebas Neue', sans-serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Transiciones Globales */
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Layout */
+    --header-height: 70px;
+    --max-width: 1400px;
+}
+
+/* Modo Día (Inversión de polaridad manteniendo la elegancia) */
+[data-theme="light"] {
+    --bg-pure: #F3F3F3;
+    --bg-surface: #FFFFFF;
+    --bg-card: #EAEAEA;
+    --text-primary: #141414;
+    --text-secondary: #222222;
+    --text-muted: #666666;
+    --accent-red: #E50914;
+    --accent-red-hover: #B81D24;
+    --border-color: #DCDCDC;
+    --shadow-sm: rgba(0, 0, 0, 0.1);
+    --shadow-lg: rgba(0, 0, 0, 0.2);
+}
+
+/* Reset Reset Básico Avanzado */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-pure);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    transition: var(--transition-smooth);
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+ul {
+    list-style: none;
+}

@@ -1,0 +1,223 @@
+/* ==========================================================================
+   HUD.CSS — Interfaz estilo app de juego móvil (formato vertical ~430px)
+   Se carga DESPUÉS de screens.css. Todo es "tamaño teléfono", sin depender
+   del ancho de la ventana (en PC se muestra dentro de un marco de smartphone).
+   ========================================================================== */
+
+:root { --header-height: 58px; --nav-height: 66px; --hud-chamfer: 12px; }
+
+/* ---------- 1. MARCO DE TELÉFONO ---------- */
+/* transform crea un contenedor para los elementos "fixed": quedan DENTRO del marco */
+.phone {
+    position: relative; width: 100%; height: 100dvh;
+    transform: translateZ(0); overflow: hidden;
+    background:
+        radial-gradient(520px 320px at 50% 0%, rgba(229, 9, 20, .20), transparent 70%),
+        linear-gradient(rgba(255, 255, 255, .035) 1px, transparent 1px) 0 0 / 28px 28px,
+        linear-gradient(90deg, rgba(255, 255, 255, .035) 1px, transparent 1px) 0 0 / 28px 28px,
+        var(--bg-pure);
+}
+@media (min-width: 600px) {
+    html, body { background: radial-gradient(900px 600px at 50% 40%, rgba(229, 9, 20, .16), transparent 70%), #050505; }
+    body { display: grid; place-items: center; }
+    .phone {
+        width: min(430px, 100vw); height: min(900px, calc(100dvh - 24px));
+        border: 10px solid #000; border-radius: 42px;
+        box-shadow: 0 0 0 2px #2b2b2b, 0 30px 80px rgba(0, 0, 0, .8), 0 0 60px rgba(229, 9, 20, .18);
+    }
+}
+
+/* ---------- 2. BARRA SUPERIOR HUD ---------- */
+.hamburger { display: none !important; }            /* la navegación ahora es la barra inferior */
+.main-header {
+    background: linear-gradient(180deg, var(--bg-surface), var(--bg-pure));
+    border-bottom: 2px solid var(--accent-red);
+    box-shadow: 0 4px 18px rgba(229, 9, 20, .25);
+}
+.header-container { max-width: none; padding: 0 12px; gap: 8px; }
+.player-badge { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.avatar {
+    flex: none; width: 38px; height: 38px; display: grid; place-items: center;
+    font-family: var(--font-brand); font-size: 1.5rem; color: #fff;
+    background: radial-gradient(circle at 35% 30%, #ff3b45, var(--accent-red-hover));
+    border: 2px solid var(--text-primary); border-radius: 50%;
+    box-shadow: 0 0 14px rgba(229, 9, 20, .7);
+}
+.player-meta { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; min-width: 0; }
+.player-meta .student-name { font-size: 1.15rem; line-height: 1; white-space: nowrap; }
+.player-meta .badge-nickname { font-size: .68rem; padding: 1px 6px; }
+.header-actions { gap: 8px; flex: none; }
+.theme-btn, .audio-btn {
+    width: 34px; height: 34px; padding: 0; font-size: 1rem; display: grid; place-items: center;
+    background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 50%;
+}
+
+/* ---------- 3. NAVEGACIÓN INFERIOR ---------- */
+main { bottom: var(--nav-height); }
+.bottom-nav {
+    position: absolute; left: 0; right: 0; bottom: 0; height: var(--nav-height); z-index: 1000;
+    background: linear-gradient(0deg, var(--bg-surface), var(--bg-pure));
+    border-top: 2px solid var(--accent-red);
+    box-shadow: 0 -4px 18px rgba(229, 9, 20, .25);
+}
+.bottom-nav ul { display: flex; height: 100%; }
+.bottom-nav li { flex: 1; min-width: 0; }
+.bottom-nav .nav-link {
+    height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
+    font-size: .62rem; font-weight: 600; letter-spacing: .3px; color: var(--text-muted);
+}
+.bottom-nav .nav-link i { font-size: 1.25rem; transition: var(--transition-fast); }
+.bottom-nav .nav-link::after {
+    bottom: auto; top: -2px; left: 50%; transform: translateX(-50%); height: 3px; width: 0;
+    background: var(--text-primary); box-shadow: 0 0 10px var(--accent-red);
+}
+.bottom-nav .nav-link.active, .bottom-nav .nav-link:hover { color: var(--text-primary); }
+.bottom-nav .nav-link.active::after, .bottom-nav .nav-link:hover::after { width: 56%; }
+.bottom-nav .nav-link.active i { color: var(--accent-red); transform: translateY(-2px) scale(1.15); text-shadow: 0 0 12px var(--accent-red); }
+.bottom-nav .nav-link.active { background: linear-gradient(0deg, rgba(229, 9, 20, .22), transparent 75%); }
+
+/* ---------- 4. TÍTULOS Y PANELES ESTILO HUD ---------- */
+.screen .section-title {
+    align-self: flex-start; font-size: 1.3rem; letter-spacing: 1px;
+    padding: 5px 26px 5px 12px; margin-bottom: clamp(8px, 1.4vh, 14px);
+    border-left: 4px solid var(--accent-red);
+    background: linear-gradient(90deg, rgba(229, 9, 20, .35), transparent);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 0 100%);
+}
+.profile-card, .timetable-wrapper, .contact-section .panel, .songs-sidebar, .player-display, .game-card {
+    clip-path: polygon(0 0, calc(100% - var(--hud-chamfer)) 0, 100% var(--hud-chamfer), 100% 100%, var(--hud-chamfer) 100%, 0 calc(100% - var(--hud-chamfer)));
+    box-shadow: inset 0 0 24px rgba(229, 9, 20, .10) !important;
+}
+
+/* Pestañas generales (Perfil y Contacto) */
+.hud-tabs, .day-tabs { flex: none; display: flex; gap: 6px; margin-bottom: clamp(8px, 1.4vh, 14px); }
+.hud-tabs button, .day-tabs button {
+    flex: 1; padding: clamp(6px, 1.1vh, 10px) 4px; font-size: .74rem; font-weight: 700; letter-spacing: .4px;
+    color: var(--text-muted); background: var(--bg-surface); border: 1px solid var(--border-color);
+    clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); transition: var(--transition-fast);
+}
+.hud-tabs button.active, .day-tabs button.active {
+    color: #fff; background: var(--accent-red); border-color: var(--accent-red);
+    box-shadow: 0 0 14px rgba(229, 9, 20, .5);
+}
+[data-pane] { display: none !important; }
+.profile-card.is-shown { display: block !important; }
+.contact-section .panel.is-shown { display: flex !important; }
+
+/* ---------- 5. INICIO: ESCENARIO + BOTONES FLOTANTES ---------- */
+.hero-title { font-size: clamp(1.8rem, 8vw, 2.4rem) !important; }
+.hero-anecdote { font-size: .88rem; margin-bottom: 14px; }
+.hero-content { max-width: 100%; margin-top: -70px; }
+.hero-buttons { flex-wrap: wrap; gap: 8px; }
+.hero-buttons .btn { padding: 9px 18px; font-size: .85rem; }
+.carousel-arrow { opacity: .85; width: 38px; height: 38px; top: 20%; font-size: 1.1rem; }
+.carousel-arrow.prev { left: 8px; }
+.carousel-arrow.next { right: 8px; }
+.carousel-indicators { bottom: 92px; }
+.hud-side { position: absolute; bottom: 118px; z-index: 20; display: flex; flex-direction: column; gap: 10px; }
+.hud-side--left { left: 10px; }
+.hud-side--right { right: 10px; }
+.hud-orb {
+    width: 54px; display: flex; flex-direction: column; align-items: center; gap: 3px; color: #fff;
+}
+.hud-orb i {
+    width: 48px; height: 48px; display: grid; place-items: center; font-size: 1.15rem;
+    background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, .22), rgba(0, 0, 0, .7));
+    border: 2px solid var(--accent-red); border-radius: 50%;
+    box-shadow: 0 0 14px rgba(229, 9, 20, .6); transition: var(--transition-fast);
+}
+.hud-orb:hover i { transform: scale(1.1); background: var(--accent-red); }
+.hud-orb small {
+    font-size: .6rem; font-weight: 700; padding: 1px 8px; background: rgba(0, 0, 0, .75);
+    border: 1px solid var(--accent-red); border-radius: 10px;
+}
+.hud-quick { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 20; display: flex; gap: 8px; }
+.hud-card {
+    flex: 1; display: flex; align-items: center; gap: 10px; padding: 9px 12px; color: #fff;
+    background: linear-gradient(135deg, rgba(0, 0, 0, .8), rgba(40, 40, 46, .8));
+    border: 1px solid var(--border-color);
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: var(--transition-fast);
+}
+.hud-card i { font-size: 1.4rem; color: var(--accent-red); }
+.hud-card span { display: flex; flex-direction: column; line-height: 1.15; }
+.hud-card small { font-size: .58rem; letter-spacing: 1.5px; color: var(--text-muted); }
+.hud-card strong { font-family: var(--font-brand); font-size: 1.15rem; letter-spacing: 1px; }
+.hud-card--accent { background: linear-gradient(135deg, var(--accent-red), var(--accent-red-hover)); border-color: #ff6a70; }
+.hud-card--accent i, .hud-card--accent small { color: #fff; }
+.hud-card:hover { transform: translateY(-3px); }
+
+/* ---------- 6. PERFIL: una tarjeta a la vez ---------- */
+.screen .profile-grid { display: flex !important; flex-direction: column; flex: 1; min-height: 0; margin: 0 !important; gap: 0 !important; }
+.screen .profile-card { flex: 1; min-height: 0; padding: clamp(10px, 1.8vh, 18px) !important; overflow: hidden !important; }
+.screen .card-header { font-size: clamp(1.1rem, 2.8vh, 1.4rem) !important; margin-bottom: clamp(6px, 1.2vh, 12px) !important; }
+.screen .card-list { gap: clamp(4px, .9vh, 9px) !important; }
+.screen .card-list li { font-size: clamp(.7rem, 1.65vh, .86rem) !important; padding-bottom: clamp(3px, .6vh, 6px) !important; }
+.screen .card-list li span { font-size: clamp(.64rem, 1.4vh, .76rem) !important; margin-bottom: 1px !important; }
+
+/* ---------- 7. HORARIO: hora + un día ---------- */
+.schedule-section .timetable-wrapper { padding: clamp(8px, 1.5vh, 14px); }
+.schedule-section .sub-title { font-size: 1.05rem; margin-bottom: 8px; }
+.schedule-section .timetable { font-size: clamp(.7rem, 1.8vh, .9rem); }
+.timetable :is(th, td):first-child { width: 38%; }
+.timetable th { font-size: clamp(.85rem, 2vh, 1.05rem); }
+.timetable[data-day="1"] :is(th, td):not(:nth-child(1)):not(:nth-child(2)),
+.timetable[data-day="2"] :is(th, td):not(:nth-child(1)):not(:nth-child(3)),
+.timetable[data-day="3"] :is(th, td):not(:nth-child(1)):not(:nth-child(4)),
+.timetable[data-day="4"] :is(th, td):not(:nth-child(1)):not(:nth-child(5)),
+.timetable[data-day="5"] :is(th, td):not(:nth-child(1)):not(:nth-child(6)),
+.timetable[data-day="6"] :is(th, td):not(:nth-child(1)):not(:nth-child(7)),
+.timetable[data-day="7"] :is(th, td):not(:nth-child(1)):not(:nth-child(8)) { display: none; }
+
+/* ---------- 8. MÚSICA: reproductor arriba, lista abajo ---------- */
+.screen .filter-container { gap: 6px; margin-bottom: 8px; }
+.screen .filter-btn { padding: 5px 10px; font-size: .68rem; border-radius: 14px; }
+.screen .music-hub-container { display: flex !important; flex-direction: column-reverse; gap: 8px; min-height: 0; }
+.screen .player-display { flex: none; padding: 8px 12px; }
+.screen .player-content { flex-direction: row; text-align: left; gap: 12px; flex-wrap: wrap; }
+.screen .player-album-art { width: 64px; height: 64px; margin: 0; }
+.screen .player-info { flex: 1; min-width: 0; }
+.screen .player-info h3 { font-size: .9rem; }
+.screen .player-info p { font-size: .72rem; }
+.screen .player-controls { margin: 0; gap: 12px; }
+.screen .player-controls button { font-size: 1.1rem; }
+.screen .player-controls .play-trigger { font-size: 2rem; }
+.screen .songs-sidebar { flex: 1; min-height: 0; padding: 6px; scrollbar-width: none; }
+.songs-sidebar::-webkit-scrollbar { display: none; }
+.screen .track-item { padding: 5px 10px; margin-bottom: 4px; }
+.track-item { justify-content: space-between; }
+.track-info { flex: 1; min-width: 0; }
+.track-item.active .track-title { color: var(--accent-red); }
+.track-title { font-size: .8rem; }
+.track-artist { font-size: .66rem; color: var(--text-muted); }
+.track-duration { font-size: .7rem; color: var(--text-muted); }
+
+/* ---------- 9. JUEGOS ---------- */
+.games-grid { grid-template-columns: repeat(2, 1fr); }
+.game-search-box { max-width: none; }
+
+/* ---------- 10. CONTACTO: una sección a la vez ---------- */
+.contact-grid { display: flex !important; flex-direction: column; flex: 1; min-height: 0; }
+.contact-section .panel { flex: 1; min-height: 0; }
+
+/* ---------- 11. INDICADOR EN LÍNEA / SIN CONEXIÓN ---------- */
+.net-status {
+    display: flex; align-items: center; gap: 5px; white-space: nowrap;
+    font-size: .6rem; font-weight: 700; padding: 4px 8px; border-radius: 12px;
+    color: var(--text-secondary); background: var(--bg-card); border: 1px solid var(--border-color);
+}
+.net-status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 8px #2ecc71; }
+.net-status.is-offline { color: #ffb066; border-color: #e67e22; }
+.net-status.is-offline::before { background: #e67e22; box-shadow: 0 0 8px #e67e22; }
+
+/* ---------- 12. COLA OFFLINE DEL FORMULARIO ---------- */
+.success-alert.is-pending { border-color: #e67e22; color: #ffb066; }
+.queue-status { display: none; margin-top: 6px; font-size: .72rem; font-weight: 600; text-align: center; color: #ffb066; }
+.queue-status.is-visible { display: block; }
+
+/* ---------- 13. FILA RESALTADA EN EL HORARIO ---------- */
+.timetable tr.fila-activa .time-slot { background: rgba(229, 9, 20, .25); color: var(--text-primary); }
+
+/* ---------- 14. ENLACE A SPOTIFY EN EL REPRODUCTOR ---------- */
+.spotify-link { display: inline-block; margin-top: 2px; font-size: .66rem; font-weight: 700; color: #1ed760; }
+.spotify-link:hover { text-decoration: underline; }

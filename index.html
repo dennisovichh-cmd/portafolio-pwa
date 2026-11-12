@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexis Mendoza | DENNISOVICHH Portfolio</title>
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#141414">
+    <!-- Aplica el tema guardado por theme.js (clave "theme") antes de pintar: evita el parpadeo -->
+    <script>try { var t = localStorage.getItem('theme'); if (t) { document.documentElement.setAttribute('data-theme', t); } } catch (e) {}</script>
+    <!-- Estilos (screens.css va al final para sobrescribir) -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/screens.css">
+    <link rel="stylesheet" href="css/hud.css">
+    <!-- Iconos FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="phone">
+
+    <!-- BARRA SUPERIOR TIPO HUD -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="player-badge">
+                <span class="avatar">D</span>
+                <div class="player-meta">
+                    <span class="student-name">ALEXIS MENDOZA</span>
+                    <span class="badge-nickname">DENNISOVICHH</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <span id="estadoRed" class="net-status" role="status" aria-live="polite">En línea</span>
+                <button id="themeToggle" class="theme-btn" aria-label="Cambiar Tema"><i class="fas fa-moon"></i></button>
+                <button id="globalAudioBtn" class="audio-btn" aria-label="Música de Fondo"><i class="fas fa-volume-mute"></i></button>
+                <button class="hamburger" id="hamburgerMenu" aria-label="Abrir Menú"><span></span><span></span><span></span></button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- PANTALLA 1: HERO (carrusel) -->
+        <section id="hero" class="hero-carousel screen">
+            <!-- carousel.js inyecta los slides aquí -->
+            <div class="carousel-track" id="carouselTrack"></div>
+            <button class="carousel-arrow prev" id="carouselPrev"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-arrow next" id="carouselNext"><i class="fas fa-chevron-right"></i></button>
+            <div class="carousel-indicators" id="carouselIndicators"></div>
+            <!-- Botones flotantes laterales -->
+            <div class="hud-side hud-side--left">
+                <a href="#profile" class="hud-orb"><i class="fas fa-user"></i><small>Perfil</small></a>
+                <a href="#schedule" class="hud-orb"><i class="fas fa-calendar-days"></i><small>Horario</small></a>
+            </div>
+            <div class="hud-side hud-side--right">
+                <a href="#music" class="hud-orb"><i class="fas fa-music"></i><small>Música</small></a>
+                <a href="#games" class="hud-orb"><i class="fas fa-gamepad"></i><small>Juegos</small></a>
+            </div>
+            <!-- Tarjetas de acceso rápido -->
+            <div class="hud-quick">
+                <a href="#schedule" class="hud-card"><i class="fas fa-calendar-check"></i><span><small>SEMANA</small><strong>Horario</strong></span></a>
+                <a href="#contact" class="hud-card hud-card--accent"><i class="fas fa-envelope"></i><span><small>ESCRÍBEME</small><strong>Contacto</strong></span></a>
+            </div>
+        </section>
+
+        <!-- PANTALLA 2: PERFIL -->
+        <section id="profile" class="profile-section section-padding screen">
+            <h2 class="section-title">Perfil Profesional</h2>
+            <div class="hud-tabs" data-tabs>
+                <button type="button" class="active" data-tab="0">Enfoque</button>
+                <button type="button" data-tab="1">Intereses</button>
+                <button type="button" data-tab="2">Técnico</button>
+            </div>
+            <div class="profile-grid">
+                <div class="profile-card is-shown" data-pane="0">
+                    <div class="card-header"><i class="fas fa-terminal"></i> Áreas de Enfoque</div>
+                    <ul class="card-list">
+                        <li><span>Investigación:</span> Sistemas Distribuidos & Alta Disponibilidad</li>
+                        <li><span>Análisis Lógico:</span> Optimización de Algoritmos & Complejidad</li>
+                        <li><span>Arquitectura:</span> Diseño de Microservicios & Escalabilidad</li>
+                        <li><span>Infraestructura:</span> Automatización de Entornos & DevOps</li>
+                        <li><span>Persistencia:</span> Gestión de Big Data & Modelos NoSQL</li>
+                        <li><span>Seguridad:</span> Mitigación de Riesgos & Criptografía</li>
+                        <li><span>Procesamiento:</span> Flujos Dinámicos & Datos en Tiempo Real</li>
+                        <li><span>I+D Técnico:</span> Modelos Emergentes & Código de Bajo Nivel</li>
+                    </ul>
+                </div>
+                <div class="profile-card" data-pane="1">
+                    <div class="card-header"><i class="fas fa-network-wired"></i> Intereses Corporativos</div>
+                    <ul class="card-list">
+                        <li><span>Productivo:</span> Automatización de Procesos & Seguridad de Redes</li>
+                        <li><span>Futuro:</span> IA Aplicada a Infraestructura (Smart Grid)</li>
+                        <li><span>Eficiencia:</span> Optimización de Recursos & Escalabilidad Cloud</li>
+                        <li><span>Gobernanza:</span> Auditoría de Sistemas & Cumplimiento Técnico</li>
+                        <li><span>Estrategia:</span> Continuidad de Negocio & Tolerancia a Fallos</li>
+                        <li><span>Innovación:</span> Arquitecturas Híbridas & Nodos Descentralizados</li>
+                        <li><span>Despliegue:</span> Orquestación Avanzada & Pipelines de Alta Velocidad</li>
+                        <li><span>Métricas:</span> Monitoreo Predictivo & Telemetría en Tiempo Real</li>
+                    </ul>
+                </div>
+                <div class="profile-card" data-pane="2">
+                    <div class="card-header"><i class="fas fa-server"></i> Especialidades Técnicas</div>
+                    <ul class="card-list">
+                        <li><span>Backend & Core:</span> Lógica Algorítmica, Arquitectura Limpia & BD</li>
+                        <li><span>Entorno & OS:</span> Control de Versiones con Git, Linux & Scripting</li>
+                        <li><span>Optimización:</span> Diagnóstico Avanzado & Ajuste de Rendimiento</li>
+                        <li><span>Sistemas de Red:</span> Configuración de Firewalls & Enrutamiento Seguro</li>
+                        <li><span>Integración:</span> Desarrollo de APIs Robustas & Conectores SCADA</li>
+                        <li><span>Automatización:</span> Despliegue de Tareas Cron & Pipelines CI/CD</li>
+                        <li><span>Virtualización:</span> Gestión de Contenedores & Entornos Aislados</li>
+                        <li><span>Mantenimiento:</span> Refactorización de Código & Limpieza de Legados</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 3: HORARIO -->
+        <section id="schedule" class="schedule-section section-padding screen">
+            <div class="timetable-wrapper">
+                <h3 class="sub-title">Cronograma Semanal</h3>
+                <div class="day-tabs">
+                    <button type="button" data-day="1">Lun</button><button type="button" data-day="2">Mar</button><button type="button" data-day="3">Mié</button><button type="button" data-day="4">Jue</button><button type="button" data-day="5">Vie</button><button type="button" data-day="6">Sáb</button><button type="button" data-day="7">Dom</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="timetable">
+                        <thead>
+                            <tr>
+                                <th>Bloque Horario</th><th>Lunes</th><th>Martes</th><th>Miércoles</th><th>Jueves</th><th>Viernes</th><th>Sábado</th><th>Domingo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="time-slot">05:00 - 06:30</td>
+                                <td class="activity active-personal">Salir a Trotar</td><td class="activity active-rest">Descanso / Sueño</td><td class="activity active-personal">Salir a Trotar</td><td class="activity active-rest">Descanso / Sueño</td><td class="activity active-personal">Salir a Trotar</td><td class="activity active-rest">Descanso / Sueño</td><td class="activity active-personal">Salir a Trotar</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">06:45 - 07:20</td>
+                                <td class="activity active-rest">Ducha / Aseo</td><td class="activity active-rest">Ducha / Aseo</td><td class="activity active-rest">Ducha / Aseo</td><td class="activity active-rest">Ducha / Aseo</td><td class="activity active-rest">Ducha / Aseo</td><td class="activity active-rest">Ducha / Aseo</td><td class="activity active-rest">Ducha / Aseo</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">07:20 - 07:35</td>
+                                <td class="activity active-rest">Desayuno</td><td class="activity active-rest">Desayuno</td><td class="activity active-rest">Desayuno</td><td class="activity active-rest">Desayuno</td><td class="activity active-rest">Desayuno</td><td class="activity active-rest">Desayuno</td><td class="activity active-rest">Desayuno</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">08:30 - 11:45</td>
+                                <td class="activity active-design">Clases: Diseño Web II</td><td class="activity active-design">Clases: Diseño Web II</td><td class="activity active-design">Clases: Diseño Web II</td><td class="activity active-design">Clases: Diseño Web II</td><td class="activity active-design">Clases: Diseño Web II</td><td class="activity active-rest">Tiempo Libre</td><td class="activity active-rest">Tiempo Libre</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">12:45 - 13:45</td>
+                                <td class="activity active-rest">Almuerzo</td><td class="activity active-rest">Almuerzo</td><td class="activity active-rest">Almuerzo</td><td class="activity active-rest">Almuerzo</td><td class="activity active-rest">Almuerzo</td><td class="activity active-rest">Almuerzo</td><td class="activity active-rest">Almuerzo</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">15:00 - 20:00</td>
+                                <td class="activity active-design">Estudio / Código</td><td class="activity active-dev">Trabajo (Boliche)</td><td class="activity active-design">Estudio / Código</td><td class="activity active-dev">Trabajo (Boliche)</td><td class="activity active-dev">Trabajo (Boliche)</td><td class="activity active-dev">Trabajo (Boliche)</td><td class="activity active-design">Películas en Casa</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">21:00 - 00:00</td>
+                                <td class="activity active-personal">Tareas de la U</td><td class="activity active-personal">Tareas de la U</td><td class="activity active-personal">Tareas de la U</td><td class="activity active-personal">Tareas de la U</td><td class="activity active-dev">Trabajo (Boliche)</td><td class="activity active-dev">Trabajo (Boliche)</td><td class="activity active-design">Películas en Casa</td>
+                            </tr>
+                            <tr>
+                                <td class="time-slot">00:00 - 02:30</td>
+                                <td class="activity active-rest">Descanso / Sueño</td><td class="activity active-rest">Descanso / Sueño</td><td class="activity active-rest">Descanso / Sueño</td><td class="activity active-rest">Descanso / Sueño</td><td class="activity active-dev">Trabajo (Hasta 1:30am)</td><td class="activity active-dev">Trabajo (Hasta 2:30am)</td><td class="activity active-rest">Descanso / Sueño</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 4: MÚSICA (sin miniaturas: evita el bucle de errores de imagen) -->
+        <section id="music" class="music-section section-padding screen">
+            <h2 class="section-title">Music Hub Experience</h2>
+            <div class="filter-container">
+                <button class="filter-btn active" data-genre="all">Todos los Géneros</button>
+                <button class="filter-btn" data-genre="urbano">Urbano & Reggaetón</button>
+                <button class="filter-btn" data-genre="techno">Techno & Rave</button>
+                <button class="filter-btn" data-genre="rock">Rock & Heavy Metal</button>
+                <button class="filter-btn" data-genre="folclore">Folclore & Bachata</button>
+            </div>
+            <div class="music-hub-container">
+                <div class="songs-sidebar">
+                    <ul id="playlistTracks" class="playlist-tracks"><!-- music.js dibuja las canciones --></ul>
+                </div>
+                <!-- Reproductor detallado (portada dibujada en SVG, no necesita archivo) -->
+                <div class="player-display" id="playerDisplay">
+                    <div class="player-blur-bg" id="playerBlurBg"></div>
+                    <div class="player-content">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><rect width='200' height='200' fill='%232f2f2f'/><circle cx='100' cy='100' r='60' fill='%23E50914'/><circle cx='100' cy='100' r='14' fill='%23141414'/></svg>" alt="Portada de Álbum" class="player-album-art" id="playerAlbumArt">
+                        <div class="player-info">
+                            <h3 id="playerTrackTitle">Selecciona una pista</h3>
+                            <p id="playerTrackArtist">Género / Artista</p>
+                            <a id="playerSpotifyLink" class="spotify-link" href="https://open.spotify.com" target="_blank" rel="noopener"><i class="fab fa-spotify"></i> Abrir en Spotify</a>
+                        </div>
+                        <div class="player-controls">
+                            <button id="trackPrev"><i class="fas fa-step-backward"></i></button>
+                            <button id="trackPlayTrigger" class="play-trigger"><i class="fas fa-play-circle"></i></button>
+                            <button id="trackNext"><i class="fas fa-step-forward"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PANTALLA 5: ENTRETENIMIENTO (catálogo de juegos; games.js llena #games-grid) -->
+        <section id="games" class="games-section section-padding screen">
+            <h2 class="section-title">Mis Juegos Favoritos</h2>
+            <div class="game-search-box">
+                <i class="fas fa-search"></i>
+                <input type="search" id="game-search" placeholder="Buscar juego o categoría..." autocomplete="off">
+            </div>
+            <div id="games-grid" class="games-grid"></div>
+        </section>
+
+        <!-- PANTALLA 6: FILTRO DE 3 CAPAS + CONTACTO -->
+        <section id="contact" class="contact-section section-padding screen">
+            <h2 class="section-title">Filtro y Contacto</h2>
+            <div class="hud-tabs" data-tabs>
+                <button type="button" class="active" data-tab="filter">Filtro 3 capas</button>
+                <button type="button" data-tab="form">Formulario</button>
+            </div>
+            <div class="contact-grid">
+                <div class="panel is-shown" data-pane="filter">
+                    <h3 class="sub-title"><i class="fas fa-filter"></i> Filtro Dinámico de 3 Capas</h3>
+                    <label for="capa1">Capa 1: Área</label>
+                    <select id="capa1">
+                        <option value="">-- Elija Área --</option>
+                        <option value="academico">Académico (UPDS)</option>
+                        <option value="desarrollo">Desarrollo Software</option>
+                    </select>
+                    <label for="capa2">Capa 2: Módulo</label>
+                    <select id="capa2" disabled><option value="">-- Primero elija el área --</option></select>
+                    <p class="layer-label">Capa 3: Elemento filtrado</p>
+                    <div id="resultadoFiltro" class="result-box">Seleccione las capas anteriores...</div>
+                </div>
+                <div class="panel" data-pane="form">
+                    <h3 class="sub-title"><i class="fas fa-envelope"></i> Formulario de Contacto Profesional</h3>
+                    <form id="contactForm" novalidate>
+                        <label for="nombre">Nombre Completo:</label>
+                        <input type="text" id="nombre" placeholder="Ej. Alexis Mendoza" autocomplete="name">
+                        <small class="field-error" id="errNombre">Ingresa tu nombre (mínimo 3 letras).</small>
+                        <label for="correo">Correo Electrónico:</label>
+                        <input type="email" id="correo" placeholder="correo@ejemplo.com" autocomplete="email">
+                        <small class="field-error" id="errCorreo">Ingresa un correo válido.</small>
+                        <label for="mensaje">Mensaje o Requerimiento:</label>
+                        <textarea id="mensaje" placeholder="Escribe tu mensaje..."></textarea>
+                        <small class="field-error" id="errMensaje">El mensaje debe tener al menos 10 caracteres.</small>
+                        <button type="submit" class="send-btn">Enviar Mensaje</button>
+                        <p class="success-alert" id="successAlert" role="status">✔ ¡Mensaje enviado correctamente!</p>
+                        <p class="queue-status" id="colaEstado" role="status" aria-live="polite"></p>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- BARRA DE NAVEGACIÓN INFERIOR (se "hidrata" en hud.js) -->
+    <nav class="bottom-nav" id="navMenu" data-hidratado="false">
+        <ul>
+            <li><a href="#hero" class="nav-link active"><i class="fas fa-house"></i><span>Inicio</span></a></li>
+            <li><a href="#profile" class="nav-link"><i class="fas fa-user"></i><span>Perfil</span></a></li>
+            <li><a href="#schedule" class="nav-link"><i class="fas fa-calendar-days"></i><span>Horario</span></a></li>
+            <li><a href="#music" class="nav-link"><i class="fas fa-music"></i><span>Música</span></a></li>
+            <li><a href="#games" class="nav-link"><i class="fas fa-gamepad"></i><span>Juegos</span></a></li>
+            <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i><span>Contacto</span></a></li>
+        </ul>
+    </nav>
+
+    </div><!-- /.phone -->
+
+    <!-- Audio ambiental global -->
+    <audio id="globalAudioSource" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/music.js"></script>
+    <script src="js/games.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/hud.js"></script>
+</body>
+</html>
